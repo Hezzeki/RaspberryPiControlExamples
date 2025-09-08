@@ -1,1 +1,90 @@
-Initial README
+#+title: Control examples for the raspberry Pi (3b+ in my case). There are many included languages.
+#+description: The control examples include: C, C++, Rust, Ocaml.
+
+Most of these examples will be hardware control example's following: Freenove Starter kit. But there will also be a section on self-hosting a website out of a raspberry pi.
+
+The names of the sections here correspond to folders in the project space.
+
+Inside the RaspberryPi I mkdir a directory called "Projects", this is the root of my code. Projects has libs (which i download) and then proj_n which match the below projects. Each proj_n has a file called lang.txt which contains the language used to write this project.
+
+Before every session we run:
+#+begin_src bash
+sudo apt update && \
+sudo apt upgrade
+#+end_src
+
+Regarding GPIO visit this site for a [[https://pinout.xyz/pinout/wiringpi][mapping]] or on the pi run "gpio readall", which can be done after the [[C]] step.
+
+* Notes on the electronics:
+** LED
+- Longer leg: +
+- Shorter leg: -
+- Diode, which only work if current is flowing in the correct direction:
+  ([[https://www.wevolver.com/article/diode-symbols-a-comprehensive-guide-to-understanding-circuit-diagrams][Arrow with bar]]) positive going into arrow.
+- Range Table:
+
+  |-------+----------+-------------+-------------|
+  | LED   | Voltage  | Max Current | Recommended |
+  | Red   | 1.9-2.2V | 20mA        | 10mA        |
+  | Green | 2.9-3.4V | 10mA        | 5mA         |
+  | Blue  | 2.9-3.4V | 10mA        | 5mA         |
+  |-------+----------+-------------+-------------|
+** Resistor
+Represented with a [[https://en.wikipedia.org/wiki/Resistor][squiggle]]. Remember V = IR "Voltage equals Current times Resistance", Ohm's law.
+
+NEVER connect two poles (power/+ and GND/-) of a power supply with anything of low Resistance this will short the circuit, likely damaging everything.
+
+Resistors are non-polar, so the orientation in a circuit does not matter.
+
+
+
+** Breadboard
+[[https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard/][How to use a breadboard]] or [[https://www.sciencebuddies.org/science-fair-projects/references/how-to-use-a-breadboard][alternatively]].
+
+Breadboards are indexed by rows of numbers and columns of letters. They are connected with the relation: For each row grouped columns are connected, i.e. A-E and F-J are connected and for the Red/Blue lines the length tells how connected they are, they are not connected to the opposite side lines.
+
+The buses/rails are detailed below:
+The blue (black sometimes) line is the ground / negative bus.
+
+The red line is the positive, and any breaks indicate possible multiple voltage sources.
+
+
+* Additional notes on compiling!
+** WiringPi
+
+*** C
+This library is required and for C can be found [[https://github.com/WiringPi/WiringPi][here.]] Within the Pi do:
+
+#+begin_src bash
+git clone https://github.com/WiringPi/WiringPi.git
+cd WiringPi
+./build
+# Test the installation
+gpio -v
+#+end_src
+
+Additionally, you must adjust the Makefile to find WiringPi. Here is an example of adjusting the make file if wiring pi is in /path/:
+
+#+begin_src makefile
+# Include the wiring Pi Lib
+gcc ... -lwiringPi ...
+#+end_src
+
+* proj_1)
+
+** Required Items
+- GPIO Extension Shield and Cable
+- BreadBoard
+- LED
+- 220 $\Omega{}$ resistor (Red-Red-Black-Black-Brown)
+- 2 Wires
+
+** Physical Setup
+1) The GPIO Extension((1..20dg))
+2) LED(+(27e),-(26e))
+3) $220\Omega$(23a, 27a ~ 27e)
+4) Wire(IO17/6b, 23b ~ 23a)
+5) Wire(GND/20c, 26c ~ -(26e))
+
+** Software
+In proj_1 run "make" then ./blink. Run make help for more options.
