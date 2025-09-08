@@ -1,5 +1,5 @@
 #+title: Control examples for the raspberry Pi (3b+ in my case). There are many included languages.
-#+description: The control examples include: C, C++, Rust, Ocaml.
+#+description: The control examples include: C, C++, Rust, Ocaml (and maybe more if I am feeling it).
 
 Most of these examples will be hardware control example's following: Freenove Starter kit. But there will also be a section on self-hosting a website out of a raspberry pi.
 
@@ -37,7 +37,6 @@ NEVER connect two poles (power/+ and GND/-) of a power supply with anything of l
 Resistors are non-polar, so the orientation in a circuit does not matter.
 
 
-
 ** Breadboard
 [[https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard/][How to use a breadboard]] or [[https://www.sciencebuddies.org/science-fair-projects/references/how-to-use-a-breadboard][alternatively]].
 
@@ -63,7 +62,7 @@ cd WiringPi
 gpio -v
 #+end_src
 
-Additionally, you must adjust the Makefile to find WiringPi. Here is an example of adjusting the make file if wiring pi is in /path/:
+Additionally, you must adjust the Makefile to find WiringPi. Here is an example of adjusting the Makefile:
 
 #+begin_src makefile
 # Include the wiring Pi Lib
