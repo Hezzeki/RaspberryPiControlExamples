@@ -10,12 +10,12 @@ program button
   ! in a /lib folder for good practice
   ! Define the interfaces with the header files
   interface
-     ! wiringPiSetup(void)
+     ! int wiringPiSetup(void)
      integer(c_int) function wiringPiSetup() bind(C, name="wiringPiSetup")
        use, intrinsic :: iso_c_binding
        ! This is the void setup function wrapped
      end function wiringPiSetup
-     ! pinMode(int pin, int mode)
+     ! void pinMode(int pin, int mode)
      subroutine pinMode(pin, mode) bind(C, name="pinMode")
        use, intrinsic :: iso_c_binding
        integer(c_int), value :: pin, mode
